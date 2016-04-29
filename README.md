@@ -14,9 +14,10 @@ const SSE = require("sse-node"),
       http = require("http");
 
 http.createServer((req, res) => {
-    if (req.url !== "/sse") return;
+    if (req.url !== "/sse") return res.end();
     
-    // This will open a SSE connection on the request and will send the message to the client. On disconnection, a message is logged.  
+    // This will open a SSE connection on the request and will send the message to the client.
+    //On disconnection, a message is logged.
     const client = SSE(res);
     client.send("Hello world!");
     client.onClose(() => console.log("Bye client!"));
@@ -24,7 +25,7 @@ http.createServer((req, res) => {
 .listen(80);
 ```
 
-Example with Express.js:
+###Example with Express.js:
 
 ```javascript
 const SSE = require("sse-node"),
@@ -60,7 +61,8 @@ SSE(response, [options])
     
         `ping`: When to send a ping to the client each X seconds (by default is disabled)
         `retry`: After how many millisecons to retry the connection (by default is 3000)
-        `padding`: Some older browsers require to write a 2KB padding when the SSE connection starts. By default this is disabled.
+        `padding`: Some older browsers require to write a 2KB padding when the SSE connection starts.
+          By default this is disabled.
 
 This function returns a object with the following methods:
 ```javascript
@@ -68,16 +70,18 @@ This function returns a object with the following methods:
 ```
     *Data* can be anything. Objects will get serialized
 
-    *Event*: You can send a message to a specific event and listen to it on the client side with ev.addEventListener("eventName", function). By default, all messages are sent to the 'message' event
+    *Event*: You can send a message to a specific event and listen to it on the client side
+      with ev.addEventListener("eventName", function). By default, all messages are sent to the 'message' event
 
 ---
 ```javascript
 .onClose([callback])
 ```
-    When the client disconnects, will call the specified callback. The param is optional because this function also clears the ping interval when set.
+    When the client disconnects, will call the specified callback. The param is optional because this function
+      also clears the ping interval when set.
     
     
 ###Test with:
 
     node test
-Then navigate with your browser to http://localhost:8080 and open the javascript console
+Then navigate with your browser to `http://localhost:8080` and open the javascript console
