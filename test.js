@@ -10,14 +10,14 @@ server = http.createServer((req, res) => {
     if (req.url === "/favicon.ico") return res.end();
     
     // SSE
-    const client = SSE(res, {
+    const client = SSE(req, res, {
         padding: true,
         ping: 10000
     });    
     
-    client.send("test!", "event");
     client.send("start");
-    client.onClose(() => console.log('req.url: ' + req.url));
+    client.send("test!", "event");
+    client.onClose(() => console.log('Bye client!'));
 });
 
-server.listen(8080, '127.0.0.1', () => console.log('Server started on port 8080'));
+server.listen(9090, '127.0.0.1', () => console.log('Server started on port 9090'));

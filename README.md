@@ -17,8 +17,8 @@ http.createServer((req, res) => {
     if (req.url !== "/sse") return res.end();
     
     // This will open a SSE connection on the request and will send the message to the client.
-    //On disconnection, a message is logged.
-    const client = SSE(res);
+    // On disconnection, a message is logged.
+    const client = SSE(req, res);
     client.send("Hello world!");
     client.onClose(() => console.log("Bye client!"));
 })
@@ -32,7 +32,7 @@ const SSE = require("sse-node"),
       app = require("express")();
 
 app.get("/sse", (req, res) => {
-    const client = SSE(res);
+    const client = SSE(req, res);
     client.send("Hello world!");
     client.onClose(() => console.log("Bye client!"));
 });
@@ -52,10 +52,10 @@ es.onmessage = function(ev) {
 ## API
 
 ```javascript
-SSE(response, [options])
+SSE(request, response, [options])
 ```
 
-    Wrap a HTTP response object with this function to create a SSE connection for the incoming request.
+    Wrap a HTTP request/response object with this function to create a SSE connection for the incoming request.
     
     *Options* can have the following properties:
     
@@ -84,4 +84,4 @@ This function returns a object with the following methods:
 ###Test with:
 
     node test
-Then navigate with your browser to `http://localhost:8080` and open the javascript console
+Then navigate with your browser to `http://localhost:9090` and open the javascript console

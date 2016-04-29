@@ -6,6 +6,8 @@
 
 "use strict";
 
+const padding = ":" + Array(2049).join(" ") + "\n";
+
 // @param data (Any) = the data to send to the client
 // @param event (String) [OPTIONAL] = message event
 const __send__ = function(data, event) {
@@ -36,19 +38,22 @@ __onClose__ = function(callback) {
 };
 
 /** const SSE = require("sse-node"),
- *  client = SSE(res);
+ *  client = SSE(req, res);
  *  client.send("test");
  *
+ * @param req (HTTP request object)
  * @param res (HTTP response object)
  * @param options (Hash) [OPTIONAL] = Map of options
       padding=false (Boolean): When to write a 2KB header (for older browsers)
       ping=false (Integer): When to send a ping to the client each X seconds
       retry=3000 (Integer): Number of milliseconds to retry the connection
  **/
-module.exports = (res, options) => {
+module.exports = (req, res, options) => {
     options = options || {};
-  
+   
     // Configure the EventStream request
+    req.socket.setNoDelay(true);
+    
     res.writeHead(200, {
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
@@ -56,7 +61,7 @@ module.exports = (res, options) => {
     });
     
     // 2KB Padding (required from some old browsers)
-    if (options.padding) res.write(":" + Array(2049).join(" ") + "\n");
+    if (options.padding) res.write(padding);
     
     // Connection retry
     res.write("retry: " + (options.retry || 3000) + '\n');
