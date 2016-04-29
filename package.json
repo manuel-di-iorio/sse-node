@@ -1,0 +1,16 @@
+{
+  "name": "sse-node",
+  "version": "1.0.0",
+  "description": "Server sent events",
+  "main": "index.js",
+  "keywords": [
+    "server",
+    "sent",
+    "event",
+    "sse",
+    "node"
+  ],
+  "author": "Manuel Di Iorio",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
