@@ -39,6 +39,24 @@ app.get("/sse", (req, res) => {
 
 app.listen(80);
 ```
+
+###Example with Koa.js:
+
+```javascript
+const SSE = require("sse-node"),
+      app = require("koa")();
+
+app.use(function *(next) => {
+    if (this.url !== "/sse") return;
+    
+    const client = SSE(this.req, this.res);
+    client.send("Hello world!");
+    client.onClose(() => console.log("Bye client!"));
+});
+
+app.listen(80);
+```
+
 ---
 On the client side, just connect with javascript to the server with:
 ```javascript
