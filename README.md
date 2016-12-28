@@ -46,7 +46,7 @@ app.listen(80);
 const SSE = require("sse-node"),
       app = require("koa")();
 
-app.use(function *(next) => {
+app.use(function *(next) => { // just replace * with async in Koa 2
     if (this.url !== "/sse") return;
     
     const client = SSE(this.req, this.res);
