@@ -46,7 +46,7 @@ app.listen(80);
 const SSE = require("sse-node"),
       app = require("koa")();
 
-app.use(function *(next) { // just replace function *(next) with async (ctx, next) => in Koa 2
+app.use(function *(next) { // Also compatible with Koa 2, see the doc for the changes
     if (this.url !== "/sse") return;
     
     const client = SSE(this.req, this.res);
