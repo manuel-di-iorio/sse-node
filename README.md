@@ -58,12 +58,14 @@ app.listen(80);
 ```
 
 ---
-On the client side, just connect with javascript to the server with:
+**On the client side, just connect with javascript to the server with:**
 ```javascript
 var es = new EventSource("/sse");
 es.onmessage = function(ev) {
     alert(ev.data); //will output 'Hello world!'
 };
+
+// You can also add listen other events with .addEventListener()
 ```
 
 ---
