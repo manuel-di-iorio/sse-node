@@ -65,7 +65,7 @@ es.onmessage = function(ev) {
     alert(ev.data); //will output 'Hello world!'
 };
 
-// You can also add listen other events with .addEventListener()
+// You can also listen other events with .addEventListener()
 ```
 
 ---
