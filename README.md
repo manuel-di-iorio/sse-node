@@ -1,13 +1,13 @@
 # Server-sent events for Node.js
 Send data to the clients in real time with SSE technology
 
-###Install it with:
+### Install it with:
   
     npm install sse-node
     or
     git clone https://github.com/manuel-di-iorio/sse-node.git
     
-###Example with HTTP server:
+### Example with HTTP server:
 
 ```javascript
 const SSE = require("sse-node"),
@@ -25,7 +25,7 @@ http.createServer((req, res) => {
 .listen(80);
 ```
 
-###Example with Express.js:
+### Example with Express.js:
 
 ```javascript
 const SSE = require("sse-node"),
@@ -40,7 +40,7 @@ app.get("/sse", (req, res) => {
 app.listen(80);
 ```
 
-###Example with Koa.js:
+### Example with Koa.js:
 
 ```javascript
 const SSE = require("sse-node"),
@@ -101,7 +101,7 @@ This function returns a object with the following methods:
       also clears the ping interval when set.
     
     
-###Test with:
+### Test with:
 
     node test
 Then navigate with your browser to `http://localhost:9090` and open the javascript console
