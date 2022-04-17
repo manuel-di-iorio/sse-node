@@ -1,3 +1,5 @@
+# NOTICE: Unmaintained repository
+
 # Server-sent events for Node.js
 Send data to the clients in real time with SSE technology
 
